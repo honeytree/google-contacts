@@ -51,6 +51,8 @@ module GContacts
       end
 
       if entry["gContact:groupMembershipInfo"].is_a?(Hash)
+        entry["gContact:groupMembershipInfo"] = entry["gContact:groupMembershipInfo"].first if
+          Array === entry["gContact:groupMembershipInfo"]
         @modifier_flag = :delete if entry["gContact:groupMembershipInfo"]["@deleted"] == "true"
         @group_id = entry["gContact:groupMembershipInfo"]["@href"]
       end
